@@ -1,5 +1,9 @@
-export interface GetImagesDto {
+import { IsNumber } from 'class-validator';
+
+export class GetImagesDto {
+  @IsNumber()
   offset: number;
+  @IsNumber()
   limit: number;
 }
 
@@ -14,8 +18,9 @@ export interface ReturnImagesDto {
   next: string;
 }
 
-export interface GetImageDto {
+export class GetImageDto {
   color: string;
+  @IsNumber()
   ratio: number;
 }
 

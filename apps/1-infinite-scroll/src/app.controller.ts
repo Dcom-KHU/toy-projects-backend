@@ -30,7 +30,7 @@ export class AppController {
     if (!limit) {
       limit = 10;
     }
-    console.log(offset, limit);
+
     if (limit > 200) {
       throw new NotFoundException('no data');
     }
@@ -39,11 +39,12 @@ export class AppController {
     }
 
     const images: Image[] = [];
-    for (let i = offset; i < limit; i += 1) {
+
+    for (let idx = offset; idx < limit; idx = idx + 1) {
       images.push({
         src: `${
           req.baseUrl
-        }/images/${i}?color=${getRandomColor()}&ratio=${getRandomRatio()}`,
+        }/images/${idx}?color=${getRandomColor()}&ratio=${getRandomRatio()}`,
       });
     }
     const res: ReturnImagesDto = {
@@ -52,6 +53,7 @@ export class AppController {
       hasMore: limit <= 200,
       count: Math.min(limit - offset, 10),
     };
+    console.log(res);
     return res;
   }
 
